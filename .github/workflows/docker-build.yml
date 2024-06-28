@@ -57,7 +57,7 @@ jobs:
         run: |
             img_path="ghcr.io/${{ env.PACKAGE_NAME }}"
             if [[ -z '${{ matrix.build.tag }}' ]]; then
-                WEBUI_TAG="$(curl -s https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/tags | jq -r '.[0].name')"
+                WEBUI_TAG="$(curl -s $WEBUI_REPO/tags | jq -r '.[0].name')"
             else
                 WEBUI_TAG="${{ matrix.build.tag }}"
             fi
