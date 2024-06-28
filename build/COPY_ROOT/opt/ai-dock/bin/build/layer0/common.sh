@@ -57,7 +57,7 @@ build_common_install_webui() {
     fi
 
     cd /opt
-    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui
+    git clone $WEBUI_REPO
     cd /opt/stable-diffusion-webui
     git checkout "$WEBUI_TAG"
     
