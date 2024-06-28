@@ -16,7 +16,7 @@ ENV PYTORCH_VERSION="${PYTORCH_VERSION}"
 ARG WEBUI_TAG
 ENV WEBUI_TAG=${WEBUI_TAG}
 
-ARG WEBUI_REPO
+ARG WEBUI_REPO="https://github.com/lllyasviel/stable-diffusion-webui-forge"
 ENV WEBUI_REPO=${WEBUI_REPO}
 
 ENV IMAGE_SLUG="stable-diffusion-webui"
