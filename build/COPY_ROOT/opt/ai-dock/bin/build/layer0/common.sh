@@ -59,7 +59,7 @@ build_common_install_webui() {
     echo "web_ui repo: $WEBUI_REPO"
 
     cd /opt
-    git clone $WEBUI_REPO
+    git clone "$WEBUI_REPO" stable-diffusion-webui
     cd /opt/stable-diffusion-webui
     git checkout "$WEBUI_TAG"
     
