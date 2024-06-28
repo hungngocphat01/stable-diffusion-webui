@@ -51,7 +51,7 @@ build_common_install_jupyter_kernels() {
 build_common_install_webui() {
     # Get latest tag from GitHub if not provided
     if [[ -z $WEBUI_TAG ]]; then
-        export WEBUI_TAG="$(curl -s https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/tags | \
+        export WEBUI_TAG="$(curl -s $WEBUI_REPO/tags | \
             jq -r '.[0].name')"
         env-store WEBUI_TAG
     fi

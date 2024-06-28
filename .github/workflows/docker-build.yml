@@ -95,7 +95,7 @@ jobs:
       matrix:
         build:
           # Undeclared release tag finds latest from GitHub tags
-          - {latest: "true", tag: "latest", python: "3.10", pytorch: "2.2.2", cuda: "11.8.0-runtime"}
+          - {latest: "true", tag: "latest", python: "3.10", pytorch: "2.2.2", cuda: "11.8.0-runtime", forge: "true"}
           # - {latest: "false", tag: "v1.9.0", python: "3.10", pytorch: "2.2.2", cuda: "12.1.1-runtime"}
           # - {latest: "false", tag: "v1.8.0", python: "3.10", pytorch: "2.2.2", cuda: "12.1.1-runtime"}
           
@@ -135,9 +135,16 @@ jobs:
         name: Set tags
         run: |
           img_path="ghcr.io/${{ env.PACKAGE_NAME }}"
-          
+
+          if [[ ${{ matrix.build.forge }} == "true" ]]; then
+            WEBUI_REPO=https://github.com/lllyasviel/stable-diffusion-webui-forge
+          else
+            WEBUI_REPO=https://github.com/AUTOMATIC1111/stable-diffusion-webui
+          fi
+          echo "WEBUI_REPO=${WEBUI_REPO}" >> ${GITHUB_ENV}
+
           if [[ -z '${{ matrix.build.tag }}' ]]; then
-                WEBUI_TAG="$(curl -s https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/tags | jq -r '.[0].name')"
+                WEBUI_TAG="$(curl -s $WEBUI_REPO/tags | jq -r '.[0].name')"
             else
                 WEBUI_TAG="${{ matrix.build.tag }}"
             fi
@@ -163,6 +170,7 @@ jobs:
             PYTHON_VERSION=${{ matrix.build.python }}
             PYTORCH_VERSION=${{ matrix.build.pytorch }}
             WEBUI_TAG=${{ env.WEBUI_TAG }}
+            WEBUI_REPO=${ env.WEBUI_REPO }
           push: true
           provenance: false
           tags: ${{ env.TAGS }}
