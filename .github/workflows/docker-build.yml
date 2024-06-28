@@ -170,7 +170,7 @@ jobs:
             PYTHON_VERSION=${{ matrix.build.python }}
             PYTORCH_VERSION=${{ matrix.build.pytorch }}
             WEBUI_TAG=${{ env.WEBUI_TAG }}
-            WEBUI_REPO=${ env.WEBUI_REPO }
+            WEBUI_REPO=${{ env.WEBUI_REPO }}
           push: true
           provenance: false
           tags: ${{ env.TAGS }}
