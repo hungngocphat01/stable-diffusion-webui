@@ -56,6 +56,8 @@ build_common_install_webui() {
         env-store WEBUI_TAG
     fi
 
+    echo "web_ui repo: $WEBUI_REPO"
+
     cd /opt
     git clone $WEBUI_REPO
     cd /opt/stable-diffusion-webui

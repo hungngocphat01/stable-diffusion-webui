@@ -60,7 +60,7 @@ services:
         - SERVICEPORTAL_METRICS_PORT=${SERVICEPORTAL_METRICS_PORT:-21111}
         - SERVICEPORTAL_URL=${SERVICEPORTAL_URL:-}
         - WEBUI_BRANCH=${WEBUI_BRANCH:-}
-        - WEBUI_REPO=${WEBUI_REPO:-https://github.com/lllyasviel/stable-diffusion-webui-forge}
+        - WEBUI_REPO=${WEBUI_REPO:-}
         - WEBUI_FLAGS=${WEBUI_FLAGS:-}
         - WEBUI_PORT_HOST=${WEBUI_PORT_HOST:-7860}
         - WEBUI_PORT_LOCAL=${WEBUI_PORT_LOCAL:-17860}
