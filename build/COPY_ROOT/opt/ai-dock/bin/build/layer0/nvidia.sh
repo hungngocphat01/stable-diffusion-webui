@@ -2,7 +2,7 @@
 
 build_nvidia_main() {
     echo "Kohya status flag: $KOHYA"
-    if [[ "$KOHYA" == 1 ]]; then
+    if [[ "$KOHYA" == "true" ]]; then
         build_common_install_kohya
     fi
 

@@ -145,9 +145,9 @@ jobs:
           echo "WEBUI_REPO=${WEBUI_REPO}" >> ${GITHUB_ENV}
 
           if [[ ${{ matrix.build.kohya }} == "true" ]]; then
-            KOHYA=1
+            KOHYA="true"
           else
-            KOHYA=0
+            KOHYA="false"
           fi
           echo "KOHYA=${KOHYA}" >> ${GITHUB_ENV}
 
