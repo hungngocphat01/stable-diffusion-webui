@@ -19,6 +19,9 @@ ENV WEBUI_TAG=${WEBUI_TAG}
 ARG WEBUI_REPO="https://github.com/lllyasviel/stable-diffusion-webui-forge"
 ENV WEBUI_REPO=${WEBUI_REPO}
 
+ARG KOHYA
+ENV KOHYA=${KOHYA}
+
 ENV IMAGE_SLUG="stable-diffusion-webui"
 ENV OPT_SYNC=stable-diffusion-webui
 
