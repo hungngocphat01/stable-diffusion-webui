@@ -95,7 +95,8 @@ jobs:
       matrix:
         build:
           # Undeclared release tag finds latest from GitHub tags
-          - {latest: "true", tag: "latest", python: "3.10", pytorch: "2.2.2", cuda: "11.8.0-runtime", forge: "true"}
+          - {latest: "true", tag: "latest", python: "3.10", pytorch: "2.2.2", cuda: "11.8.0-runtime", forge: "true", kohya: "false"}
+          - {latest: "true", tag: "latest", python: "3.10", pytorch: "2.2.2", cuda: "11.8.0-runtime", forge: "true", kohya: "true"}
           # - {latest: "false", tag: "v1.9.0", python: "3.10", pytorch: "2.2.2", cuda: "12.1.1-runtime"}
           # - {latest: "false", tag: "v1.8.0", python: "3.10", pytorch: "2.2.2", cuda: "12.1.1-runtime"}
           
@@ -142,6 +143,13 @@ jobs:
             WEBUI_REPO=https://github.com/AUTOMATIC1111/stable-diffusion-webui
           fi
           echo "WEBUI_REPO=${WEBUI_REPO}" >> ${GITHUB_ENV}
+
+          if [[ ${{ matrix.build.kohya }} == "true" ]]; then
+            KOHYA=1
+          else
+            KOHYA=0
+          fi
+          echo "KOHYA=${KOHYA}" >> ${GITHUB_ENV}
 
           if [[ -z '${{ matrix.build.tag }}' ]]; then
                 WEBUI_TAG="$(curl -s $WEBUI_REPO/tags | jq -r '.[0].name')"

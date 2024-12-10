@@ -2,6 +2,11 @@
 
 build_nvidia_main() {
     build_nvidia_install_webui
+
+    if [[ "$KOHYA" == 1 ]]; then
+        build_common_install_kohya
+    fi
+
     build_common_run_tests
     build_nvidia_run_tests
 }

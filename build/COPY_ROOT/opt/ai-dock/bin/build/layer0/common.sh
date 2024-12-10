@@ -64,6 +64,16 @@ build_common_install_webui() {
     git checkout "$WEBUI_TAG"
     
     micromamba run -n webui ${PIP_INSTALL} -r requirements_versions.txt
+    micromamba run -n webui ${PIP_INSTALL} setuptools==69.0
+}
+
+build_common_install_kohya() {
+    cd /opt
+    git clone https://github.com/bmaltais/kohya_ss -b v24.1.7
+    cd kohya_ss
+
+    echo "================ NOW INSTALLING KOHYA_SS ================"
+    sudo bash -c "umask 007; cd /opt/kohya_ss; ./setup-runpod.sh"
 }
 
 build_common_run_tests() {
