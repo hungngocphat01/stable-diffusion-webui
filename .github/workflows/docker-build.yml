@@ -177,6 +177,7 @@ jobs:
             IMAGE_BASE=ghcr.io/ai-dock/python:${{ matrix.build.python }}-cuda-${{ matrix.build.cuda }}-${{ env.UBUNTU_VERSION }}
             PYTHON_VERSION=${{ matrix.build.python }}
             PYTORCH_VERSION=${{ matrix.build.pytorch }}
+            KOHYA=${{ matrix.build.kohya }}
             WEBUI_TAG=${{ env.WEBUI_TAG }}
             WEBUI_REPO=${{ env.WEBUI_REPO }}
           push: true
