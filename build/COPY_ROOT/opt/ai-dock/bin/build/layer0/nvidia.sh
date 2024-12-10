@@ -1,14 +1,12 @@
 #!/bin/false
 
 build_nvidia_main() {
-    build_nvidia_install_webui
-
     echo "Kohya status flag: $KOHYA"
-
     if [[ "$KOHYA" == 1 ]]; then
         build_common_install_kohya
     fi
 
+    build_nvidia_install_webui
     build_common_run_tests
     build_nvidia_run_tests
 }
