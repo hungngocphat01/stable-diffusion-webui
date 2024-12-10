@@ -152,21 +152,25 @@ jobs:
           echo "KOHYA=${KOHYA}" >> ${GITHUB_ENV}
 
           if [[ -z '${{ matrix.build.tag }}' ]]; then
-                WEBUI_TAG="$(curl -s $WEBUI_REPO/tags | jq -r '.[0].name')"
-            else
-                WEBUI_TAG="${{ matrix.build.tag }}"
-            fi
-            [ -z "$WEBUI_TAG" ] && { echo "Error: WEBUI_TAG is empty. Exiting script." >&2; exit 1; }
-            echo "WEBUI_TAG=${WEBUI_TAG}" >> ${GITHUB_ENV}
+              WEBUI_TAG="$(curl -s $WEBUI_REPO/tags | jq -r '.[0].name')"
+          else
+              WEBUI_TAG="${{ matrix.build.tag }}"
+          fi
+          [ -z "$WEBUI_TAG" ] && { echo "Error: WEBUI_TAG is empty. Exiting script." >&2; exit 1; }
+          echo "WEBUI_TAG=${WEBUI_TAG}" >> ${GITHUB_ENV}
 
-            base_tag="cuda-${{ matrix.build.cuda }}-${{ env.UBUNTU_VERSION }}"
+          base_tag="cuda-${{ matrix.build.cuda }}-${{ env.UBUNTU_VERSION }}"
 
-            if [[ ${{ matrix.build.latest }} == "true" ]]; then
-                echo "Marking latest"
-                TAGS="${img_path}:${base_tag}, ${img_path}:latest, ${img_path}:latest-jupyter, ${img_path}:latest-cuda"
-            else
-                TAGS="${img_path}:${base_tag}-${WEBUI_TAG}"
-            fi
+          if [[ ${{ matrix.build.latest }} == "true" ]]; then
+              echo "Marking latest"
+              TAGS="${img_path}:${base_tag}, ${img_path}:latest, ${img_path}:latest-jupyter, ${img_path}:latest-cuda"
+          else
+              TAGS="${img_path}:${base_tag}-${WEBUI_TAG}"
+          fi
+
+          if [[ $KOHYA == "true" ]]; then
+            TAGS="${TAGS}, ${img_path}:latest-kohya"
+          fi
           echo "TAGS=${TAGS}" >> ${GITHUB_ENV}
       -
         name: Build and push
